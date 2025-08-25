@@ -9,7 +9,7 @@ import WhyUs from "@/components/WhyUs";
 
 export default function Home() {
   return (
-    <div>
+    <div className="w-[100%]">
       <NavigationBar />
       <HeroSection />
       <PartnersScroll />

@@ -64,12 +64,12 @@ const HeroSection = () => {
         </div>
 
         {/* Image */}
-        <div className="relative w-full md:w-[300px] h-[290px] bg-[#f9c36025] backdrop-blur-[2px] z-[2]">
+        <div className="relative w-full md:w-[300px] h-[350px] md:h-[290px] bg-[#f9c36025] backdrop-blur-[2px] z-[2]">
           <Image
             src={"/assets/portrait-person.png"}
             alt="Portrait Person"
             fill
-            className="absolute object-cover h-full"
+            className="absolute object-cover h-full w-full"
           />
         </div>
 

@@ -102,7 +102,7 @@ const Services = () => {
 
       <div className="relative">
         {/* Navigation Buttons */}
-        <div className="absolute flex w-full h-full z-50 justify-between items-center px-[-300px] md:px-[50px]">
+        <div className="absolute flex w-full h-full z-50 justify-between items-center  md:px-[50px]">
           <button onClick={handlePrev} className="scrollBarBtn">
             <IoArrowBack />
           </button>
@@ -113,7 +113,7 @@ const Services = () => {
         </div>
 
         {/* Cards Container */}
-        <div className="flex justify-center items-center gap-[100px] w-full md:w-[80%]  mx-auto min-h-[300px]">
+        <div className="flex justify-center items-center overflow-x-hidden gap-[100px] w-full md:w-[80%]  mx-auto min-h-[300px]">
           {visibleCards.map((card) => {
             const isCenter = card.position === "center";
             const isLeft = card.position === "left";
