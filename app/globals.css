@@ -20,7 +20,95 @@
 }
 
 body {
-  background: var(--background);
+  background: #060b13;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+.homeLink {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.homeLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(to right, #9580e7, #2563eb);
+  width: 0;
+  transition: width 0.3s ease;
+}
+
+.homeLink:hover::after,
+.homeLink.active::after {
+  width: 100%;
+}
+.gradientBackground {
+  @apply bg-gradient-to-tr from-[#2563EB]
+   to-[#9580E7];
+}
+
+.after {
+  position: relative;
+}
+.after::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  @apply bg-gradient-to-l from-[#2563EB]
+   to-[#9580E7];
+}
+
+.ourWorkBtn {
+  @apply flex flex-row items-center bg-[#ffffff1d] 
+  backdrop-blur-[2px] mt-[30px] cursor-pointer hover:bg-gradient-to-br
+   from-[#F9606B] to-[#E8363F];
+}
+
+.hero-bg {
+  background-image: url("/assets/homeBackground.png");
+  background-size: cover;
+  background-position: center;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollBarBtn {
+  @apply w-10 md:w-12 h-12 rounded-sm bg-white/10 backdrop-blur-sm  
+  flex items-center justify-center text-white hover:bg-white/20 
+  transition-all duration-300;
+}
+
+.footerTitle {
+  @apply bg-gradient-to-b from-[#F9C360] 
+            to-[#E87A36] bg-clip-text text-transparent text-[18px] font-semibold;
+}
+
+.footerLink {
+  @apply text-[14px];
+}
+
+.footerIcon {
+  @apply w-[50px] h-[50px] flex justify-center items-center bg-gradient-to-br from-[#F9606B] to-[#E8363F] rounded-full;
 }
