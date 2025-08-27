@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useState, useEffect, useCallback } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+
 import AboutCard from "./AboutCard";
 import { IoArrowBack, IoArrowForward } from "react-icons/io5";
 
