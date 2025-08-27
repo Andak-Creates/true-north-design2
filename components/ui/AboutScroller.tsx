@@ -2,12 +2,17 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import AboutCard from "./AboutCard";
+import { IoArrowBack, IoArrowForward } from "react-icons/io5";
 
 export default function AboutScroller() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
+  const [scrollDirection, setScrollDirection] = useState<"left" | "right">(
+    "right"
+  );
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const reverseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // check scroll position
   const checkScroll = () => {
@@ -17,7 +22,7 @@ export default function AboutScroller() {
     setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth);
   };
 
-  // scroll logic
+  // Manual scroll logic
   const scroll = useCallback((dir: "left" | "right") => {
     const el = scrollRef.current;
     if (!el) return;
@@ -25,7 +30,7 @@ export default function AboutScroller() {
     const card = el.querySelector("div") as HTMLElement;
     if (!card) return;
 
-    const cardWidth = card.offsetWidth + 16; // gap-4 = 16px
+    const cardWidth = card.offsetWidth + 16;
     el.scrollBy({
       left: dir === "left" ? -cardWidth : cardWidth,
       behavior: "smooth",
@@ -34,19 +39,63 @@ export default function AboutScroller() {
     resetAutoScroll(); // reset timer when user clicks
   }, []);
 
-  // auto-scroll function
+  // Auto-scroll with reverse effect
+  const autoScroll = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const card = el.querySelector("div") as HTMLElement;
+    if (!card) return;
+
+    const cardWidth = card.offsetWidth + 16;
+    const isAtRightEdge = el.scrollLeft + el.clientWidth >= el.scrollWidth;
+    const isAtLeftEdge = el.scrollLeft <= 0;
+
+    if (scrollDirection === "right") {
+      if (isAtRightEdge) {
+        // Hit the right edge, pause briefly then start reversing
+        clearInterval(intervalRef.current!);
+        reverseTimeoutRef.current = setTimeout(() => {
+          setScrollDirection("left");
+          startAutoScroll();
+        }, 3000); // pause at the edge
+      } else {
+        el.scrollBy({
+          left: cardWidth,
+          behavior: "smooth",
+        });
+      }
+    } else {
+      if (isAtLeftEdge) {
+        // Hit the left edge, pause briefly then start going right again
+        clearInterval(intervalRef.current!);
+        reverseTimeoutRef.current = setTimeout(() => {
+          setScrollDirection("right");
+          startAutoScroll();
+        }, 3000); // pause at the edge
+      } else {
+        el.scrollBy({
+          left: -cardWidth,
+          behavior: "smooth",
+        });
+      }
+    }
+  }, [scrollDirection]);
+
   const startAutoScroll = useCallback(() => {
     stopAutoScroll(); // clear if already running
     intervalRef.current = setInterval(() => {
-      scroll("right");
-    }, 7000); // 👈 auto-scroll every 4s (change as needed)
-  }, [scroll]);
+      autoScroll();
+    }, 5000); // auto-scroll every 5s
+  }, [autoScroll]);
 
   const stopAutoScroll = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
+    if (reverseTimeoutRef.current) clearTimeout(reverseTimeoutRef.current);
   };
 
   const resetAutoScroll = () => {
+    stopAutoScroll();
     startAutoScroll(); // restart countdown
   };
 
@@ -59,7 +108,7 @@ export default function AboutScroller() {
     el.addEventListener("scroll", checkScroll);
     window.addEventListener("resize", checkScroll);
 
-    startAutoScroll(); // kick off auto scroll
+    startAutoScroll(); // starts auto scroll
 
     return () => {
       el.removeEventListener("scroll", checkScroll);
@@ -114,7 +163,7 @@ export default function AboutScroller() {
           </button>
         </div>
 
-        {/* Navigation buttons */}
+        {/* Navigation buttons - disables at edges */}
         <div className="flex flex-row gap-2">
           <button
             onClick={() => scroll("left")}
@@ -125,7 +174,7 @@ export default function AboutScroller() {
                 : "hover:bg-gray-100"
             }`}
           >
-            <ChevronLeft className="w-6 h-6" />
+            <IoArrowBack className="w-6 h-6" />
           </button>
 
           <button
@@ -137,7 +186,7 @@ export default function AboutScroller() {
                 : "hover:bg-gray-100"
             }`}
           >
-            <ChevronRight className="w-6 h-6" />
+            <IoArrowForward className="w-6 h-6" />
           </button>
         </div>
       </div>
