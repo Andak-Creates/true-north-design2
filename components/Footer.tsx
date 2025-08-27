@@ -4,7 +4,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="relative" id="contact">
+    <div className="relative">
       <div className="flex flex-col md:flex-row justify-between px-[30px] md:pl-[100px] pt-[100px] pb-[50px]">
         {/* Footer Links and Icons */}
         <div className="flex flex-col md:flex-row gap-[80px] mb-[75px] md:mb-0 ">
@@ -65,7 +65,7 @@ const Footer = () => {
           </div>
 
           {/* Contacts */}
-          <div className="flex flex-col gap-6 w-[300px]">
+          <div className="flex flex-col gap-6 w-[300px]" id="contact">
             <h3 className="footerTitle">Contacts</h3>
             <div className="flex flex-col gap-[13px]">
               <div className="flex flex-row items-center gap-2">

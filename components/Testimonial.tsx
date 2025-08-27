@@ -1,5 +1,6 @@
 import React from "react";
 import TestimonialCard from "./ui/TestimonialCard";
+import Link from "next/link";
 
 const Testimonial = () => {
   return (
@@ -50,11 +51,11 @@ const Testimonial = () => {
         />
       </div>
 
-      <div data-aos="zoom-in">
+      <Link href={"#contact"} data-aos="zoom-in">
         <button className="gradientBackground py-[15px] px-[25px] mt-[30px] cursor-pointer">
           Follow Us on Social Media
         </button>
-      </div>
+      </Link>
     </section>
   );
 };
