@@ -86,6 +86,7 @@ const Services = () => {
 
   return (
     <section
+      data-aos="fade-up"
       id="services"
       className="text-center relative mb-[100px] px-[30px]"
     >

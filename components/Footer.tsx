@@ -4,7 +4,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="relative">
+    <div className="relative" id="contact">
       <div className="flex flex-col md:flex-row justify-between px-[30px] md:pl-[100px] pt-[100px] pb-[50px]">
         {/* Footer Links and Icons */}
         <div className="flex flex-col md:flex-row gap-[80px] mb-[75px] md:mb-0 ">
@@ -100,38 +100,41 @@ const Footer = () => {
 
               {/* Socials */}
               <div className="flex flex-row gap-4 mt-[20px]">
-                <div className="footerIcon">
+                <Link href={"/"} className="footerIcon">
                   <Image
                     src={"/assets/footerIcons/linkedIn.png"}
                     height={30}
                     width={30}
                     alt="linkIn"
                   />
-                </div>
-                <div className="footerIcon">
+                </Link>
+
+                <Link href={"/"} className="footerIcon">
                   <Image
                     src={"/assets/footerIcons/twitter.png"}
                     height={30}
                     width={30}
                     alt="twitter"
                   />
-                </div>
-                <div className="footerIcon">
+                </Link>
+
+                <Link href={"/"} className="footerIcon">
                   <Image
                     src={"/assets/footerIcons/instagram.png"}
                     height={30}
                     width={30}
                     alt="instagram"
                   />
-                </div>
-                <div className="footerIcon">
+                </Link>
+
+                <Link href={"/"} className="footerIcon">
                   <Image
                     src={"/assets/footerIcons/facebook.png"}
                     height={30}
                     width={30}
                     alt="facebook"
                   />
-                </div>
+                </Link>
               </div>
             </div>
           </div>

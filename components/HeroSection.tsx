@@ -18,7 +18,7 @@ const HeroSection = () => {
       {/* Hero Content */}
       {/* Description */}
       <div className="py-[150px] w-full h-auto flex flex-col md:flex-row md:justify-between">
-        <div>
+        <div data-aos="fade-up">
           <h3 className="pl-[20px] after">TrueNorth Global Solutions</h3>
           <h1 className="text-[40px] md:text-[60px] md:w-[500px] font-semibold mt-[10px]">
             Comprehensive IT Solutions for{" "}
@@ -28,7 +28,10 @@ const HeroSection = () => {
           </h1>
         </div>
 
-        <div className="relative flex self-start md:self-end w-auto h-auto mt-[0px] md:mt-[100px]">
+        <div
+          data-aos="fade-left"
+          className="relative flex self-start md:self-end w-auto h-auto mt-[0px] md:mt-[100px]"
+        >
           <div className="absolute right-[-90%] top-[5%] h-[0%] w-[250px] z-[1]">
             <Lottie
               loop
@@ -51,10 +54,11 @@ const HeroSection = () => {
 
       {/* mini about section */}
       <div
+        data-aos="zoom-in"
         className="relative md:absolute bottom-[100px] md:bottom-[-60px] flex flex-col md:flex-row
         justify-start w-auto md:w-fit h-auto md:h-[300px] gap-[10px] md:gap-[100px]  md:mx-auto"
       >
-        <div className="absolute md:right-[90%] md:top-[30%] h-[100%] w-[250px] z-[1]">
+        <div className="absolute right-[20%] md:right-[80%] md:top-[30%] h-fit w-[250px] z-[1]">
           <Lottie
             loop
             autoPlay

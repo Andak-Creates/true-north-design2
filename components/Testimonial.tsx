@@ -4,6 +4,7 @@ import TestimonialCard from "./ui/TestimonialCard";
 const Testimonial = () => {
   return (
     <section
+      data-aos="fade-up"
       id="testimonials"
       className="h-auto w-full relative overflow-hidden
     flex flex-col items-center py-[50px] md:py-[100px]"
@@ -49,7 +50,7 @@ const Testimonial = () => {
         />
       </div>
 
-      <div>
+      <div data-aos="zoom-in">
         <button className="gradientBackground py-[15px] px-[25px] mt-[30px] cursor-pointer">
           Follow Us on Social Media
         </button>

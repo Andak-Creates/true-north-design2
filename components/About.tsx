@@ -5,6 +5,7 @@ import AboutScroller from "./ui/AboutScroller";
 const About = () => {
   return (
     <section
+      data-aos="fade-up"
       id="about"
       className="pt-[80px] pb-[100px] px-[30px] md:px-[100px]"
     >

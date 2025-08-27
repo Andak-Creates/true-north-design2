@@ -3,7 +3,7 @@ import ReasonTab from "./ui/ReasonTab";
 
 const WhyUs = () => {
   return (
-    <section className="py-[100px] px-[30px] md:px-[100px]">
+    <section className="py-[100px] px-[30px] md:px-[100px]" data-aos="zoom-in">
       <div className="w-full">
         <h1 className="text-[40px] md:text-[60px] font-bold leading-[60px]">
           Why Choose

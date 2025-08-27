@@ -19,6 +19,7 @@ const TestimonialCard = ({
 }: TestimonialCardProps) => {
   return (
     <div
+      data-aos="fade-up"
       className="h-fit w-auto p-[5px] 
      bg-[#FFFFFF0A]
      rounded-lg text-left shadow-md"

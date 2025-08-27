@@ -90,7 +90,7 @@ const NavigationBar = () => {
         {/* Links */}
         <div className="flex flex-col items-start mt-20 gap-6 px-6">
           {sections.map((sec) => (
-            <a
+            <Link
               key={sec}
               href={`#${sec}`}
               onClick={() => setIsOpen(false)}
@@ -99,7 +99,7 @@ const NavigationBar = () => {
               } capitalize`}
             >
               {sec}
-            </a>
+            </Link>
           ))}
 
           {/* Button */}

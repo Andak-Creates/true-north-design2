@@ -17,6 +17,7 @@ const ReasonTab = ({
 }: reasonTabProps) => {
   return (
     <div
+      data-aos="fade-up"
       className={`relative border-b-[0.5px] border-[#363D4F] ${borderStyle} mt-[30px] p-8 md:p-5 w-full
      flex md:flex-row flex-col items-center text-center`}
     >

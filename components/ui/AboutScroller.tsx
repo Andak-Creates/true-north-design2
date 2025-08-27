@@ -19,9 +19,13 @@ export default function AboutScroller() {
   const scroll = (dir: "left" | "right") => {
     const el = scrollRef.current;
     if (!el) return;
-    const scrollAmount = el.clientWidth * 0.8; // scroll by 80% of container
+
+    const card = el.querySelector("div") as HTMLElement;
+    if (!card) return;
+
+    const cardWidth = card.offsetWidth + 16;
     el.scrollBy({
-      left: dir === "left" ? -scrollAmount : scrollAmount,
+      left: dir === "left" ? -cardWidth : cardWidth,
       behavior: "smooth",
     });
   };
