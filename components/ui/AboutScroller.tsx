@@ -1,14 +1,15 @@
 "use client";
-import { useRef, useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react"; // icons
+import { useRef, useState, useEffect, useCallback } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import AboutCard from "./AboutCard";
 
 export default function AboutScroller() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // check scroll position on load and when scrolling
+  // check scroll position
   const checkScroll = () => {
     const el = scrollRef.current;
     if (!el) return;
@@ -16,31 +17,56 @@ export default function AboutScroller() {
     setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth);
   };
 
-  const scroll = (dir: "left" | "right") => {
+  // scroll logic
+  const scroll = useCallback((dir: "left" | "right") => {
     const el = scrollRef.current;
     if (!el) return;
 
     const card = el.querySelector("div") as HTMLElement;
     if (!card) return;
 
-    const cardWidth = card.offsetWidth + 16;
+    const cardWidth = card.offsetWidth + 16; // gap-4 = 16px
     el.scrollBy({
       left: dir === "left" ? -cardWidth : cardWidth,
       behavior: "smooth",
     });
+
+    resetAutoScroll(); // reset timer when user clicks
+  }, []);
+
+  // auto-scroll function
+  const startAutoScroll = useCallback(() => {
+    stopAutoScroll(); // clear if already running
+    intervalRef.current = setInterval(() => {
+      scroll("right");
+    }, 7000); // 👈 auto-scroll every 4s (change as needed)
+  }, [scroll]);
+
+  const stopAutoScroll = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
   };
 
+  const resetAutoScroll = () => {
+    startAutoScroll(); // restart countdown
+  };
+
+  // setup
   useEffect(() => {
     checkScroll();
     const el = scrollRef.current;
     if (!el) return;
+
     el.addEventListener("scroll", checkScroll);
     window.addEventListener("resize", checkScroll);
+
+    startAutoScroll(); // kick off auto scroll
+
     return () => {
       el.removeEventListener("scroll", checkScroll);
       window.removeEventListener("resize", checkScroll);
+      stopAutoScroll();
     };
-  }, []);
+  }, [startAutoScroll]);
 
   return (
     <div className="relative w-full">
@@ -90,30 +116,26 @@ export default function AboutScroller() {
 
         {/* Navigation buttons */}
         <div className="flex flex-row gap-2">
-          {/* Left Button */}
           <button
             onClick={() => scroll("left")}
             disabled={!canScrollLeft}
-            className={`  scrollBarBtn
-          ${
-            !canScrollLeft
-              ? "opacity-30 cursor-not-allowed"
-              : "hover:bg-gray-100"
-          }`}
+            className={`scrollBarBtn ${
+              !canScrollLeft
+                ? "opacity-30 cursor-not-allowed"
+                : "hover:bg-gray-100"
+            }`}
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
 
-          {/* Right Button */}
           <button
             onClick={() => scroll("right")}
             disabled={!canScrollRight}
-            className={` scrollBarBtn
-          ${
-            !canScrollRight
-              ? "opacity-30 cursor-not-allowed"
-              : "hover:bg-gray-100"
-          }`}
+            className={`scrollBarBtn ${
+              !canScrollRight
+                ? "opacity-30 cursor-not-allowed"
+                : "hover:bg-gray-100"
+            }`}
           >
             <ChevronRight className="w-6 h-6" />
           </button>

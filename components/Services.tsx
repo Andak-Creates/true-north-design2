@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { IoArrowBack, IoArrowForward } from "react-icons/io5";
 
 const Services = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const services = [
     {
@@ -67,11 +68,24 @@ const Services = () => {
     setCurrentIndex((prev) => (prev === services.length - 1 ? 0 : prev + 1));
   };
 
+  // Auto-scroll effect
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      handleNext();
+    }, 5000); // scroll every 5s
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
+
   // Get the three cards to display (left, center, right)
   const getVisibleCards = () => {
     const leftIndex =
       currentIndex === 0 ? services.length - 1 : currentIndex - 1;
+
     const centerIndex = currentIndex;
+
     const rightIndex =
       currentIndex === services.length - 1 ? 0 : currentIndex + 1;
 
@@ -137,9 +151,7 @@ const Services = () => {
                 `}
               >
                 {isCenter ? (
-                  // Active/Center card - full details
                   <div className="w-full flex flex-col justify-between items-center gap-4 p-6">
-                    {/* Image holder */}
                     <div className="h-[80px] w-[80px] relative rounded-full flex items-center justify-center">
                       <div className="h-[80px] w-[80px] relative">
                         <Image
@@ -151,19 +163,14 @@ const Services = () => {
                         />
                       </div>
                     </div>
-
-                    {/* Title */}
                     <h3 className="text-[18px] md:text-[20px] font-semibold text-white">
                       {card.title}
                     </h3>
-
-                    {/* Description */}
                     <p className="text-[14px] text-[#E9EBF1] leading-relaxed text-center">
                       {card.description}
                     </p>
                   </div>
                 ) : (
-                  // Side cards - icon only
                   <div className="w-full h-full flex items-center justify-center ">
                     <div className="h-[60px] w-[60px] relative">
                       <Image
