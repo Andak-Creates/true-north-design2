@@ -6,7 +6,7 @@ import { IoArrowBack, IoArrowForward } from "react-icons/io5";
 
 const Services = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<number | null>(null); // browser-safe typing
 
   const services = [
     {
@@ -60,38 +60,47 @@ const Services = () => {
     },
   ];
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? services.length - 1 : prev - 1));
+  // --- Interval control helpers ---
+  const startAutoScroll = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+
+    intervalRef.current = window.setInterval(() => {
+      handleNext(false); // false = don't reset again
+    }, 8000);
   };
 
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev === services.length - 1 ? 0 : prev + 1));
+  const resetAutoScroll = () => {
+    startAutoScroll(); // clears and restarts
   };
 
-  // Auto-scroll effect
   useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      handleNext();
-    }, 5000); // scroll every 5s
-
+    startAutoScroll();
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
   }, []);
 
-  // Get the three cards to display (left, center, right)
+  // --- Navigation handlers ---
+  const handlePrev = (reset: boolean = true) => {
+    setCurrentIndex((prev) => (prev === 0 ? services.length - 1 : prev - 1));
+    if (reset) resetAutoScroll();
+  };
+
+  const handleNext = (reset: boolean = true) => {
+    setCurrentIndex((prev) => (prev === services.length - 1 ? 0 : prev + 1));
+    if (reset) resetAutoScroll();
+  };
+
+  // --- Visible cards ---
   const getVisibleCards = () => {
     const leftIndex =
       currentIndex === 0 ? services.length - 1 : currentIndex - 1;
-
-    const centerIndex = currentIndex;
-
     const rightIndex =
       currentIndex === services.length - 1 ? 0 : currentIndex + 1;
 
     return [
       { ...services[leftIndex], position: "left", index: leftIndex },
-      { ...services[centerIndex], position: "center", index: centerIndex },
+      { ...services[currentIndex], position: "center", index: currentIndex },
       { ...services[rightIndex], position: "right", index: rightIndex },
     ];
   };
@@ -117,18 +126,17 @@ const Services = () => {
 
       <div className="relative">
         {/* Navigation Buttons */}
-        <div className="absolute flex w-full h-full z-50 justify-between items-center  md:px-[50px]">
-          <button onClick={handlePrev} className="scrollBarBtn">
+        <div className="absolute flex w-full h-full z-50 justify-between items-center md:px-[50px]">
+          <button onClick={() => handlePrev()} className="scrollBarBtn">
             <IoArrowBack />
           </button>
-
-          <button onClick={handleNext} className="scrollBarBtn">
+          <button onClick={() => handleNext()} className="scrollBarBtn">
             <IoArrowForward />
           </button>
         </div>
 
         {/* Cards Container */}
-        <div className="flex justify-center items-center overflow-x-hidden gap-[100px] w-full md:w-[80%]  mx-auto min-h-[300px]">
+        <div className="flex justify-center items-center overflow-x-hidden gap-[100px] w-full md:w-[80%] mx-auto min-h-[300px]">
           {visibleCards.map((card) => {
             const isCenter = card.position === "center";
             const isLeft = card.position === "left";
@@ -192,7 +200,10 @@ const Services = () => {
           {services.map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentIndex(index)}
+              onClick={() => {
+                setCurrentIndex(index);
+                resetAutoScroll();
+              }}
               className={`w-2 h-2 md:w-1 md:h-1 rounded-full transition-all duration-300 ${
                 index === currentIndex
                   ? "bg-white scale-125"

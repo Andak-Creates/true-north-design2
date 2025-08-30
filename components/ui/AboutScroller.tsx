@@ -86,7 +86,7 @@ export default function AboutScroller() {
     stopAutoScroll(); // clear if already running
     intervalRef.current = setInterval(() => {
       autoScroll();
-    }, 5000); // auto-scroll every 5s
+    }, 8000); // auto-scroll every 8s
   }, [autoScroll]);
 
   const stopAutoScroll = () => {
