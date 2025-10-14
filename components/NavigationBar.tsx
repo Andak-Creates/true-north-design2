@@ -33,7 +33,7 @@ const NavigationBar = () => {
   return (
     <nav
       className="flex flex-row fixed top-0 left-0 backdrop-blur-[5px] bg-[#0000007d] w-full
-      justify-between items-center px-[20px] md:px-[100px] py-[15px] h-auto z-20"
+      justify-between items-center px-[20px] md:px-[80px] py-[15px] h-auto z-20"
     >
       {/* Logo */}
       <div className="flex justify-center items-center gap-[3px]">
@@ -44,8 +44,8 @@ const NavigationBar = () => {
       </div>
 
       {/* Desktop Links */}
-      <div className="hidden md:flex flex-row gap-[50px] items-center">
-        <div className="flex gap-[50px]">
+      <div className="hidden md:flex flex-row md:gap-[30px] lg:gap-[50px] items-center">
+        <div className="flex md:gap-[30px] lg:gap-[50px]">
           {sections.map((sec) => (
             <Link
               key={sec}

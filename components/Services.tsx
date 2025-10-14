@@ -113,7 +113,7 @@ const Services = () => {
       id="services"
       className="text-center relative mb-[100px] px-[30px]"
     >
-      <div className="w-full md:w-[50%] mx-auto text-left md:text-center mb-12">
+      <div className="w-full md:w-[70%] lg:w-[50%] mx-auto text-left md:text-center mb-12">
         <h1 className="text-[40px] md:text-[50px] font-semibold text-white">
           Our Global IT Services
         </h1>

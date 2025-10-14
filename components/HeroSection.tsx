@@ -11,7 +11,7 @@ const HeroSection = () => {
   return (
     <main
       id="home"
-      className="relative  w-full lg:w-[100vw] h-[750px] px-[30px] md:px-[150px] hero-bg "
+      className="relative  w-full lg:w-[100vw] h-[750px] px-[30px] md:px-[80px] lg:px-[150px] hero-bg "
     >
       {/* background Image */}
 
@@ -56,7 +56,7 @@ const HeroSection = () => {
       <div
         data-aos="zoom-in"
         className="relative md:absolute bottom-[100px] md:bottom-[-60px] flex flex-col md:flex-row
-        justify-start w-auto md:w-fit h-auto md:h-[300px] gap-[10px] md:gap-[100px]  md:mx-auto"
+        justify-start w-auto md:w-fit h-auto md:h-[300px] gap-[10px] md:gap-[80px] lg:gap-[100px]  left-1/2 translate-x-[-50%]"
       >
         <div className="absolute right-[20%] md:right-[80%] md:top-[30%] h-fit w-[250px] z-[1]">
           <Lottie
