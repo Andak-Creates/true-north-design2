@@ -22,22 +22,11 @@ export default function AboutScroller() {
     setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth);
   };
 
-  // Manual scroll logic
-  const scroll = useCallback((dir: "left" | "right") => {
-    const el = scrollRef.current;
-    if (!el) return;
-
-    const card = el.querySelector("div") as HTMLElement;
-    if (!card) return;
-
-    const cardWidth = card.offsetWidth + 16;
-    el.scrollBy({
-      left: dir === "left" ? -cardWidth : cardWidth,
-      behavior: "smooth",
-    });
-
-    resetAutoScroll(); // reset timer when user clicks
-  }, []);
+  // Stop auto scroll
+  const stopAutoScroll = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    if (reverseTimeoutRef.current) clearTimeout(reverseTimeoutRef.current);
+  };
 
   // Auto-scroll with reverse effect
   const autoScroll = useCallback(() => {
@@ -53,7 +42,6 @@ export default function AboutScroller() {
 
     if (scrollDirection === "right") {
       if (isAtRightEdge) {
-        // Hit the right edge, pause briefly then start reversing
         clearInterval(intervalRef.current!);
         reverseTimeoutRef.current = setTimeout(() => {
           setScrollDirection("left");
@@ -67,7 +55,6 @@ export default function AboutScroller() {
       }
     } else {
       if (isAtLeftEdge) {
-        // Hit the left edge, pause briefly then start going right again
         clearInterval(intervalRef.current!);
         reverseTimeoutRef.current = setTimeout(() => {
           setScrollDirection("right");
@@ -82,6 +69,7 @@ export default function AboutScroller() {
     }
   }, [scrollDirection]);
 
+  // Start auto scroll
   const startAutoScroll = useCallback(() => {
     stopAutoScroll(); // clear if already running
     intervalRef.current = setInterval(() => {
@@ -89,15 +77,31 @@ export default function AboutScroller() {
     }, 8000); // auto-scroll every 8s
   }, [autoScroll]);
 
-  const stopAutoScroll = () => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-    if (reverseTimeoutRef.current) clearTimeout(reverseTimeoutRef.current);
-  };
-
+  // Reset auto scroll
   const resetAutoScroll = () => {
     stopAutoScroll();
-    startAutoScroll(); // restart countdown
+    startAutoScroll();
   };
+
+  // Manual scroll logic
+  const scroll = useCallback(
+    (dir: "left" | "right") => {
+      const el = scrollRef.current;
+      if (!el) return;
+
+      const card = el.querySelector("div") as HTMLElement;
+      if (!card) return;
+
+      const cardWidth = card.offsetWidth + 16;
+      el.scrollBy({
+        left: dir === "left" ? -cardWidth : cardWidth,
+        behavior: "smooth",
+      });
+
+      resetAutoScroll(); // reset timer when user clicks
+    },
+    [resetAutoScroll]
+  );
 
   // setup
   useEffect(() => {
@@ -118,7 +122,7 @@ export default function AboutScroller() {
   }, [startAutoScroll]);
 
   return (
-    <div className="relative w-full xl:w-[80%] xl:mx-auto" data-aos="fade-up">
+    <div className="relative w-full xl:w-[80%] xl:mx-auto" data-aos="fade-in">
       {/* Cards Container */}
       <div
         ref={scrollRef}

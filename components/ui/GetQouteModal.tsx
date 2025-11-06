@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { AiOutlineClose } from "react-icons/ai";
 
 interface GetQuoteModalProps {
   isOpen: boolean;
@@ -54,9 +55,9 @@ const GetQuoteModal: React.FC<GetQuoteModalProps> = ({ isOpen, onClose }) => {
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-400 hover:text-white text-xl"
+          className="absolute top-3 right-3 text-gray-400 hover:text-white text-xl cursor-pointer"
         >
-          &times;
+          <AiOutlineClose />
         </button>
 
         {/* Header */}
