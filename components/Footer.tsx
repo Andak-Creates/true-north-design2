@@ -152,7 +152,7 @@ const Footer = () => {
       </div>
 
       <div
-        className="flex flex-row gap-1 md:gap-2 absolute bottom-[50px] md:bottom-[80px] px-[30px] 
+        className="flex flex-row gap-1 md:gap-2 absolute bottom-[50px] md:bottom-[30px] px-[30px] 
       w-full md:px-[100px] left-0"
       >
         <p className="text-[12px] md:text-[14px]">All Rights Reserved ©2025</p>

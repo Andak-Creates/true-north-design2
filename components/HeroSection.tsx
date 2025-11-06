@@ -2,12 +2,15 @@
 
 import Lottie from "lottie-react";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { FaArrowRight, FaPlay } from "react-icons/fa6";
 import Dot from "@/public/lotties-animation/dots-dancing.json";
 import RedDot from "@/public/lotties-animation/dots-dancing-red.json";
+import GetQuoteModal from "./ui/GetQouteModal";
 
 const HeroSection = () => {
+  const [showQuote, setShowQuote] = useState(false);
+
   return (
     <main
       id="home"
@@ -41,6 +44,7 @@ const HeroSection = () => {
             />
           </div>
           <button
+            onClick={() => setShowQuote(true)}
             className="mt-[100px] py-[40px] pl-[30px] pr-[50px] w-fit text-left font-semibold z-[2]
             gradientBackground leading-[18px] 
             flex flex-col gap-[20px] h-fit self-start md:self-end cursor-pointer"
@@ -50,6 +54,8 @@ const HeroSection = () => {
             Started
           </button>
         </div>
+
+        <GetQuoteModal isOpen={showQuote} onClose={() => setShowQuote(false)} />
       </div>
 
       {/* mini about section */}

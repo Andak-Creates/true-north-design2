@@ -82,11 +82,11 @@ const PartnersScroll = () => {
   }, []);
 
   return (
-    <section className="h-auto w-full overflow-hidden flex items-center">
+    <section className="h-auto w-full overflow-hidden flex items-center darkColor">
       {/* partners container */}
       <div
         ref={containerRef}
-        className="relative w-full h-full mt-[730px] md:mt-[250px] mb-[150px]"
+        className="relative w-full h-full mt-[730px] md:mt-[150px] mb-[100px]"
       >
         {items.map((item) => (
           <div

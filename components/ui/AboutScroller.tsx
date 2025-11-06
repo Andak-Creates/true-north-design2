@@ -118,7 +118,7 @@ export default function AboutScroller() {
   }, [startAutoScroll]);
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full xl:w-[80%] xl:mx-auto" data-aos="fade-up">
       {/* Cards Container */}
       <div
         ref={scrollRef}

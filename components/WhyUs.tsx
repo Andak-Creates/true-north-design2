@@ -1,12 +1,13 @@
 import React from "react";
 import ReasonTab from "./ui/ReasonTab";
+import RulerOverlay from "./ui/RulerOverlay";
 
 const WhyUs = () => {
   return (
-    <section className="py-[100px] px-[30px] md:px-[100px]" data-aos="zoom-in">
-      <div className="w-full">
+    <section className="py-[100px] px-[30px] md:px-[100px] brightBg relative darkColor">
+      <div className="w-full" data-aos="zoom-in">
         <h1 className="text-[40px] md:text-[60px] font-bold leading-[60px]">
-          Why Choose
+          What We Offer at
           <br />
           <span
             className="text-[45px] md:text-[65px] bg-gradient-to-r from-[#9580E7] to-[#2563EB]
@@ -18,7 +19,7 @@ const WhyUs = () => {
 
         {/* Why choose Us */}
 
-        <div className="flex flex-col gap-4 mt-[50px]">
+        <div className="flex flex-col gap-4 mt-[50px] w-full md:w-[95%] md:mx-auto xl:w-[80%] xl:mx-auto">
           <ReasonTab
             number={1}
             title="Free Initial Consultation"
@@ -56,6 +57,7 @@ const WhyUs = () => {
           />
         </div>
       </div>
+      <RulerOverlay tickCount={30} spacing={50} color="#888" opacity={0.3} />
     </section>
   );
 };

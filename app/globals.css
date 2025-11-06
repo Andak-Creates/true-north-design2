@@ -25,7 +25,7 @@ html {
 }
 
 body {
-  background: #060b13;
+  background: #0b1320;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
@@ -116,4 +116,8 @@ body {
 
 .footerIcon {
   @apply w-[50px] h-[50px] flex justify-center items-center bg-gradient-to-br from-[#F9606B] to-[#E8363F] rounded-full;
+}
+
+.darkColor {
+  @apply bg-[#060B13];
 }

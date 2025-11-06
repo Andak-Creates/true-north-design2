@@ -1,17 +1,20 @@
 import React from "react";
 import TestimonialCard from "./ui/TestimonialCard";
 import Link from "next/link";
+import RulerOverlay from "./ui/RulerOverlay";
 
 const Testimonial = () => {
   return (
     <section
-      data-aos="fade-up"
       id="testimonials"
       className="h-auto w-full relative overflow-hidden
-    flex flex-col items-center py-[50px] md:py-[100px]"
+    flex flex-col items-center py-[100px] darkColor border-t-[0.5px] border-[#aaaaaa23]"
     >
       {/* content */}
-      <div className="w-full md:w-[90%] lg:w-[40%] text-center px-[40px]">
+      <div
+        className="w-full md:w-[90%] lg:w-[60%] text-center px-[40px]"
+        data-aos="fade-up"
+      >
         <p>Testimonials</p>
         <h1 className="text-[30px] lg:text-[40px] ">
           Feedbacks on our Services and Solutions
@@ -56,6 +59,8 @@ const Testimonial = () => {
           Follow Us on Social Media
         </button>
       </Link>
+
+      <RulerOverlay tickCount={15} spacing={50} color="#888" opacity={0.3} />
     </section>
   );
 };

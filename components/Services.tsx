@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { IoArrowBack, IoArrowForward } from "react-icons/io5";
+import RulerOverlay from "./ui/RulerOverlay";
 
 const Services = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -109,11 +110,13 @@ const Services = () => {
 
   return (
     <section
-      data-aos="fade-up"
       id="services"
-      className="text-center relative mb-[100px] px-[30px]"
+      className="text-center relative px-[30px] py-[100px]  scroll-mt-[50px] darkColor border-none md:border-t-[0.5px] md:border-[#aaaaaa23]"
     >
-      <div className="w-full md:w-[70%] lg:w-[50%] mx-auto text-left md:text-center mb-12">
+      <div
+        className="w-full md:w-[70%] lg:w-[75%] mx-auto text-left md:text-center mb-12"
+        data-aos="fade-up"
+      >
         <h1 className="text-[40px] md:text-[50px] font-semibold text-white">
           Our Global IT Services
         </h1>
@@ -124,19 +127,30 @@ const Services = () => {
         </p>
       </div>
 
-      <div className="relative">
+      <div className="relative w-full md:w-[90%] md:mx-auto ">
         {/* Navigation Buttons */}
         <div className="absolute flex w-full h-full z-50 justify-between items-center md:px-[50px]">
-          <button onClick={() => handlePrev()} className="scrollBarBtn">
+          <button
+            onClick={() => handlePrev()}
+            className="scrollBarBtn"
+            data-aos="fade-left"
+          >
             <IoArrowBack />
           </button>
-          <button onClick={() => handleNext()} className="scrollBarBtn">
+          <button
+            onClick={() => handleNext()}
+            className="scrollBarBtn"
+            data-aos="fade-right"
+          >
             <IoArrowForward />
           </button>
         </div>
 
         {/* Cards Container */}
-        <div className="flex justify-center items-center overflow-x-hidden gap-[100px] w-full md:w-[80%] mx-auto min-h-[300px]">
+        <div
+          className="flex justify-center items-center overflow-x-hidden gap-[100px] w-full md:w-[80%] mx-auto min-h-[300px]"
+          data-aos="zoom-in"
+        >
           {visibleCards.map((card) => {
             const isCenter = card.position === "center";
             const isLeft = card.position === "left";
@@ -213,6 +227,7 @@ const Services = () => {
           ))}
         </div>
       </div>
+      <RulerOverlay tickCount={15} spacing={50} color="#888" opacity={0.3} />
     </section>
   );
 };
