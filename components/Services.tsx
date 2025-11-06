@@ -111,7 +111,7 @@ const Services = () => {
   return (
     <section
       id="services"
-      className="text-center relative px-[30px] py-[100px]  scroll-mt-[50px] darkColor md:border-t-[0.5px] md:border-[#aaaaaa23]"
+      className="text-center relative px-[30px] pt-0 pb-[100px] md:py-[100px]  scroll-mt-[50px] darkColor md:border-t-[0.5px] md:border-[#aaaaaa23]"
     >
       <div
         className="w-full md:w-[70%] lg:w-[75%] mx-auto text-left md:text-center mb-12"
