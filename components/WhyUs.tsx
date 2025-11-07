@@ -4,9 +4,12 @@ import RulerOverlay from "./ui/RulerOverlay";
 
 const WhyUs = () => {
   return (
-    <section className="py-[100px] px-[30px] md:px-[100px] brightBg relative darkColor">
+    <section
+      id="offering"
+      className="py-[100px] px-[30px] md:px-[100px] brightBg relative darkColor"
+    >
       <div className="w-full" data-aos="zoom-in">
-        <h1 className="text-[40px] md:text-[60px] font-bold leading-[60px]">
+        <h1 className="text-[35px] md:text-[60px] font-bold leading-[60px]">
           What We Offer at
           <br />
           <span
@@ -19,7 +22,7 @@ const WhyUs = () => {
 
         {/* Why choose Us */}
 
-        <div className="flex flex-col gap-4 mt-[50px] w-full md:w-[95%] md:mx-auto xl:w-[80%] xl:mx-auto">
+        <div className="flex flex-col gap-4 mt-[50px] w-full md:w-full md:mx-auto xl:w-[80%] xl:mx-auto">
           <ReasonTab
             number={1}
             title="Free Initial Consultation"

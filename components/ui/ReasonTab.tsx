@@ -22,7 +22,7 @@ const ReasonTab = ({
      flex md:flex-row flex-col items-center text-center`}
     >
       {/* Left */}
-      <div className="absolute left-5 top-0 md:top-1/2 -translate-y-1/2 text-left text-[20px] text-[#363D4F] font-semibold">
+      <div className="absolute left-5 top-0 lg:top-1/2 -translate-y-1/2 text-left text-[20px] text-[#363D4F] font-semibold">
         <p>0{number}</p>
       </div>
 
@@ -33,7 +33,7 @@ const ReasonTab = ({
       </div>
 
       {/* Right */}
-      <div className="absolute right-5 top-0 md:top-1/2 -translate-y-1/2">
+      <div className="absolute right-5 top-0 lg:top-1/2 -translate-y-1/2">
         <Image src={icon} width={45} height={45} alt="icon" />
       </div>
     </div>

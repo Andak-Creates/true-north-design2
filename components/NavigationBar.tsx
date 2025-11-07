@@ -5,7 +5,14 @@ import React, { useEffect, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import GetQuoteModal from "./ui/GetQouteModal";
 
-const sections = ["home", "services", "about", "contact"];
+const sections = [
+  "home",
+  "services",
+  "about",
+  "offering",
+  "testimonial",
+  "contact",
+];
 
 const NavigationBar = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -21,7 +28,7 @@ const NavigationBar = () => {
           }
         });
       },
-      { threshold: 0.6 }
+      { threshold: 0.4 }
     );
 
     sections.forEach((id) => {
@@ -36,7 +43,7 @@ const NavigationBar = () => {
     <>
       <nav
         className="flex flex-row fixed top-0 left-0 backdrop-blur-[5px] bg-[#0000007d] w-full
-      justify-between items-center px-[20px] md:px-[80px] py-[15px] h-auto z-20"
+      justify-between items-center px-[20px] md:px-[30px] py-[15px] h-auto z-20"
       >
         {/* Logo */}
         <div className="flex justify-center items-center gap-[3px]">
@@ -50,11 +57,15 @@ const NavigationBar = () => {
 
         {/* Desktop Links */}
         <div className="hidden md:flex flex-row md:gap-[30px] lg:gap-[50px] items-center">
-          <div className="flex md:gap-[30px] lg:gap-[50px]">
+          <div className="flex md:gap-[20px] lg:gap-[40px]">
             {sections.map((sec) => (
               <Link
                 key={sec}
                 href={`#${sec}`}
+                onClick={() => {
+                  setActiveSection(sec);
+                  setIsOpen(false);
+                }} // 👈 Add this line
                 className={`homeLink ${
                   activeSection === sec ? "active" : ""
                 } capitalize`}
@@ -83,7 +94,7 @@ const NavigationBar = () => {
 
         {/* Sidebar (Mobile Nav) */}
         <div
-          className={`fixed top-0 right-0 h-[100vh] w-[100%] sm:w-[300px] bg-black backdrop-blur-lg shadow-lg transform transition-transform duration-300 z-30 ${
+          className={`fixed top-0 right-0 h-[100vh] w-[100%] sm:w-[300px] bg-black backdrop-blur-lg shadow-lg transform transition-transform duration-300 z-5000 ${
             isOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
@@ -101,8 +112,11 @@ const NavigationBar = () => {
               <Link
                 key={sec}
                 href={`#${sec}`}
-                onClick={() => setIsOpen(false)}
-                className={`homeLink text-lg ${
+                onClick={() => {
+                  setActiveSection(sec);
+                  setIsOpen(false);
+                }} // 👈 Add this line
+                className={`homeLink ${
                   activeSection === sec ? "active" : ""
                 } capitalize`}
               >

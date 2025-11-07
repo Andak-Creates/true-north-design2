@@ -6,7 +6,7 @@ import RulerOverlay from "./ui/RulerOverlay";
 const Testimonial = () => {
   return (
     <section
-      id="testimonials"
+      id="testimonial"
       className="h-auto w-full relative overflow-hidden
     flex flex-col items-center py-[100px] darkColor border-t-[0.5px] border-[#aaaaaa23]"
     >
